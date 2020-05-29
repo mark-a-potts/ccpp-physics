@@ -358,7 +358,7 @@ if(STATIC)
 else(STATIC)
   add_library(ccppphys SHARED ${SCHEMES} ${SCHEMES_SFX_OPT} ${CAPS})
 endif(STATIC)
-
+target_include_directories(ccppphys PUBLIC ${NETCDF_INCLUDES})
 if (NOT STATIC)
   target_link_libraries(ccppphys LINK_PUBLIC ${LIBS} ${BACIO_LIB4} ${SP_LIBd} ${W3NCO_LIBd})
 endif (NOT STATIC)
