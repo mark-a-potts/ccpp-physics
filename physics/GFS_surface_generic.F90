@@ -254,7 +254,7 @@
 
         ! Local variables
         real(kind=kind_phys), parameter :: albdf = 0.06_kind_phys
-
+        logical ::  cplflx2
         ! Parameters for canopy heat storage parametrization
         real(kind=kind_phys), parameter :: z0min=0.2, z0max=1.0
         real(kind=kind_phys), parameter :: u10min=2.5, u10max=7.5
@@ -266,7 +266,7 @@
         ! Initialize CCPP error handling variables
         errmsg = ''
         errflg = 0
-
+        cplflx2 = .true.
         do i=1,im
           epi(i)    = ep1d(i)
           gfluxi(i) = gflx(i)
@@ -276,14 +276,13 @@
           v1(i)     = vgrs_1(i)
         enddo
 
-        if (cplflx .or. cplwav) then
+        if (cplflx2 .or. cplwav) then
           do i=1,im
             u10mi_cpl(i) = u10m(i)
             v10mi_cpl(i) = v10m(i)
           enddo
         endif
-
-        if (cplflx) then
+        if (cplflx2) then
           do i=1,im
             dlwsfci_cpl (i) = adjsfcdlw(i)
             dswsfci_cpl (i) = adjsfcdsw(i)
